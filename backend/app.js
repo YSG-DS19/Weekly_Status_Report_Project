@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors=require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const jwt = require('jsonwebtoken');
 
 var app = express();
 
@@ -26,6 +27,26 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+/*
+// All Customize Routers 
+var indexRouter = require('./routes/index');
+var userRouter = require('./routes/registration'); 
+var login=require('./routes/login');
+// var trainingRouter = require('./routes/users')
+var adminportal=require('./routes/admin')
+var userportal=require("./routes/users")
+
+// app.use("/",indexRouter)
+app.use('/', userRouter);
+app.use('/loginDetails',login)
+app.use("/admin",adminportal);
+app.use("/users",userportal);
+// app.use('/TrainingDetailsadmin', trainingRouter)
+*/
+
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

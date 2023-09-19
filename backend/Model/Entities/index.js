@@ -1,9 +1,11 @@
 const dbconfig=require("../../Config/dbconfig");
+require('dotenv').config()
 const sql=require("pg");
 const {Sequelize,DataTypes}=require("sequelize");
 const db={};
 
 const client= new sql.Client({ user: dbconfig.USER, password: dbconfig.PASSWORD })
+
 
 
 // Connect to the PostgreSQL database
@@ -18,7 +20,7 @@ client.connect()
     
 
  
-const sequelize=new Sequelize(
+  const sequelize=new Sequelize(
     dbconfig.DATABASE,
     dbconfig.USER,
     dbconfig.PASSWORD,{
@@ -31,6 +33,7 @@ const sequelize=new Sequelize(
     try {
       await sequelize.authenticate();
       console.log('Connection has been established successfully.');
+      console.log("Express Server is running on ", process.env.BACKEND_PORT);
     } catch (error) {
       console.error('Unable to connect to the database:', error);
     }

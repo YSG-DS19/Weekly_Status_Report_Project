@@ -2,7 +2,7 @@ module.exports={
     HOST:"localhost",
     USER:"postgres",
     PASSWORD:"root",
-    PORT:"5432",
+    PORT:"5433",
     DATABASE:"WeeklyReport",
     DIALECT:"postgres",
 }   
