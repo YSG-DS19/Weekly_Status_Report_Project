@@ -31,7 +31,7 @@ console.log("0.Inside app.js before Customize Router");
 
 // Customize Subroutes file paths
 var userCreationRouter = require('./Routes/UserRegistration'); 
-var loginRouter = require('./Routes/UserRegistration'); 
+var loginRouter = require('./Routes/Login'); 
 
 // All Customize Router 
 app.use('/signup',userCreationRouter);

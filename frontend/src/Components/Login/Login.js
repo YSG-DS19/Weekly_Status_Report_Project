@@ -51,7 +51,8 @@ function Login() {
 
       if (res.data.message==="Login Successful"){
         
-        toast.success(res.data.message);
+        toast.success(res.data.message,{autoClose:500});
+        navigate("/dashboard")
         // setCookie('UserData',res.data.userdata)
         cookies.set("role",res.data.userdata.Role);
         const roles=cookies.get("role");
@@ -63,15 +64,16 @@ function Login() {
         const token=cookies.get("token");
         console.log(token);
 
+ 
 
-
-        if (roles.includes("Admin")){
+      //   if (roles.includes("Admin")){
           
-          navigate('/adminTrainingTable')
-        }
-        else{
-          navigate('/userTrainingTable')
-        }    
+      //     navigate('/adminTrainingTable')
+      //   }
+      //   else{
+      //     navigate('/userTrainingTable')
+      //   }   
+
       }
 
 
@@ -102,25 +104,27 @@ function Login() {
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
               <form onSubmit={handleOnSubmit}>
                 <div className="form-outline mb-4">
+                <label >
+                    Email address
+                  </label>
                   <input
                     type="email"
                     id="form1Example13"
                     className="form-control form-control-lg"
                     onChange={(e)=>{setEmail(e.target.value)}}/>
-                  <label className="form-label" for="form1Example13">
-                    Email address
-                  </label>
                 </div>
-
                 <div className="form-outline mb-4">
+                <label >
+                    Password
+                  </label>
                   <input
                     type="password"
                     id="form1Example23"
                     onChange={(e)=>{setPassword(e.target.value)}}
-                    className="form-control form-control-lg" />
-                  <label className="form-label" for="form1Example23">
-                    Password
-                  </label>
+                    InputProps={{ placeholder: '' }}
+                InputLabelProps={{ shrink: true }}
+                    className="form-control form-control-lg"/>
+                 
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-lg btn-block">

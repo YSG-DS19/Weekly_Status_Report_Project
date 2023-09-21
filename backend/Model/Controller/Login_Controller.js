@@ -1,5 +1,5 @@
 const db = require("../Entities");
-const UA_table = db.UserAdminRegTable;
+const UserRegistrationtable = db.UserRegTable;
 const jwt = require('jsonwebtoken')
 // import Cookies from "universal-cookie";
 // const Cookies = require("universal-cookie")
@@ -7,12 +7,12 @@ const jwt = require('jsonwebtoken')
 
 
 const logindetailscheck = async (req, res) => {
-  
+  // console.log(req.body);
   const { email, password } = req.body;
   if (password && email) {
     try {
       // Check if a user with the same email already exists in the database
-      const existingUser = await UA_table.findOne({ where: { Email: email ,Password:password }});
+      const existingUser = await UserRegistrationtable.findOne({ where: { Email: email ,Password:password }});
         console.log(existingUser,"BAckend signin")
       if (existingUser) {
 

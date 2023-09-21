@@ -14,6 +14,7 @@ import {
   from 'mdb-react-ui-kit';
 import LoginService from '../../Services/LoginService';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
 
@@ -21,6 +22,7 @@ function Signup() {
     const [email,setEmail]=useState()
     const [password,setPassword]=useState()
     
+    const navigate = useNavigate()
     
    /*const [state, setState] = useState({
         name: '',
@@ -50,7 +52,8 @@ function Signup() {
             then((d)=>{
               console.log(d.data);
           if (d.data.message==="User added"){
-            toast.success(d.data.message);
+            toast.success(d.data.message,{autoClose:500});
+            navigate('/')
           }
     
           if (d.data.message==="Password must have a capital letter a small letter and a number and include any special character"){
