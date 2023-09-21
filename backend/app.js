@@ -4,46 +4,49 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors=require('cors');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const jwt = require('jsonwebtoken');
 
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
+console.log("0.Inside app.js before Customize Router");
+
+// Customize Subroutes file paths
+var userCreationRouter = require('./Routes/UserRegistration'); 
+var loginRouter = require('./Routes/UserRegistration'); 
+
+// All Customize Router 
+app.use('/signup',userCreationRouter);
+app.use('/login',loginRouter)
+
+
+
+console.log("1.Inside app.js After Customize ROuter");
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-/*
-// All Customize Routers 
-var indexRouter = require('./routes/index');
-var userRouter = require('./routes/registration'); 
-var login=require('./routes/login');
-// var trainingRouter = require('./routes/users')
-var adminportal=require('./routes/admin')
-var userportal=require("./routes/users")
-
-// app.use("/",indexRouter)
-app.use('/', userRouter);
-app.use('/loginDetails',login)
-app.use("/admin",adminportal);
-app.use("/users",userportal);
-// app.use('/TrainingDetailsadmin', trainingRouter)
-*/
 
 
 

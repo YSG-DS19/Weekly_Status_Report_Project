@@ -7,7 +7,7 @@ const db={};
 const client= new sql.Client({ user: dbconfig.USER, password: dbconfig.PASSWORD })
 
 
-
+console.log("4. In  Entties index.js file before Connection to Postgres");
 // Connect to the PostgreSQL database
 client.connect()
   .then(() => {
@@ -18,7 +18,7 @@ client.connect()
     console.error('Error connecting to PostgreSQL database:', err);
   });
     
-
+console.log("5. In  Entties index.js file After Connection to Postgres");
  
   const sequelize=new Sequelize(
     dbconfig.DATABASE,
@@ -32,8 +32,8 @@ client.connect()
 (async () => {
     try {
       await sequelize.authenticate();
-      console.log('Connection has been established successfully.');
-      console.log("Express Server is running on ", process.env.BACKEND_PORT);
+      console.log('Connection has been established successfully for Sequelize.');
+    //   console.log("Express Server is running on ", process.env.BACKEND_PORT);
     } catch (error) {
       console.error('Unable to connect to the database:', error);
     }
@@ -41,7 +41,7 @@ client.connect()
 
 db.sequelize=sequelize;
 
-// db.UserAdminRegTable=require("./UserAdminRegistrations")(sequelize,DataTypes);
+db.UserRegTable=require("./UserRegistration")(sequelize,DataTypes);
 // db.TrainingTable=require("./TrainingDetails")(sequelize,DataTypes);
 // db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
 
