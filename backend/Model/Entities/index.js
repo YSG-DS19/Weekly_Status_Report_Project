@@ -42,6 +42,7 @@ console.log("5. In  Entties index.js file After Connection to Postgres");
 db.sequelize=sequelize;
 
 db.UserRegTable=require("./UserRegistration")(sequelize,DataTypes);
+db.ProjectReportTable=require("./ProjectReport")(sequelize,DataTypes);
 // db.TrainingTable=require("./TrainingDetails")(sequelize,DataTypes);
 // db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
 

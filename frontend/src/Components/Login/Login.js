@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import "./Login.css";
 import Signup from "./Signup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -41,7 +41,11 @@ function Login() {
 
   const cookies = new Cookies();
   const navigate = useNavigate()
+  const [count, setBtn]= useState(0);
 
+  // useEffect(()=>{
+  //   console.log("Hello");
+  // },[])
 
   const handleOnSubmit = evt => {
     evt.preventDefault();
@@ -90,6 +94,8 @@ function Login() {
   }
 
 
+
+
   return (
     <>
       <section className="vh-100">
@@ -132,6 +138,7 @@ function Login() {
                 </button>
 
                 <div className="divider d-flex align-items-center my-4">
+                  {/* <button onClick={()=>setBtn(count+1)}>CLick ME</button> */}
                   <p className="text-center fw-bold mx-3 mb-0 text-muted">
                     Don't have an account?<a href="/signup"> SignUp</a>
                   </p>
