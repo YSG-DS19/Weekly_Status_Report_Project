@@ -20,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.disable('etag');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -28,14 +30,19 @@ app.use('/users', usersRouter);
 
 
 console.log("0.Inside app.js before Customize Router");
+
 // Customize Subroutes file paths
 var userCreationRouter = require('./Routes/UserRegistration'); 
 var loginRouter = require('./Routes/Login'); 
 var projectReportRouter = require('./Routes/ProjectReport')
+var getProjectDataRouter = require('./Routes/GetProjectData')
+var projectDataById = require('./Routes/ProjectDataById')
 // All Customize Router 
 app.use('/signup',userCreationRouter);
 app.use('/login',loginRouter)
 app.use('/projectReport',projectReportRouter)
+app.use('/getprojectdata',getProjectDataRouter)
+app.use( `reportDashboard/:id`,projectDataById)
 
 
 

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       allownull: false,
     },
     summary: {
-      type: DataTypes.STRING, 
+      type: DataTypes.TEXT, 
       allownull: false,
     },
     startDate: { 
@@ -47,41 +47,38 @@ module.exports = (sequelize, DataTypes) => {
         allownull: false,
       },
       issueRisk: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
   
     impact: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allownull: false,
     },
     mitigationPlan: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
       activitiesThisWeek: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
   
     activitiesNextWeek: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allownull: false,
     },
     highlights: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
       support: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
-      required: {
-        type: DataTypes.STRING,
-        allownull: false,
-      },
+      
       expansionOpportunities: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allownull: false,
       },
       chennaiLead: {

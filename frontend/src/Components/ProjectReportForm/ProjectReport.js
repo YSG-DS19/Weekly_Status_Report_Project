@@ -1,8 +1,9 @@
+import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 // import Button from 'react-bootstrap/Button';
-import './Dashboard.css'
+import './ProjectReport.css'
 import { Modal, Button, Form } from 'react-bootstrap';
 // import "textarea" from 'react-bootstrap'
 import { useEffect, useState } from 'react';
@@ -11,220 +12,204 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import ProjectReportService from '../../Services/ProjectReportService';
 
-function Dashboard(props) {
-  const [show, setShow] = useState(false);
-  const [currentSection, setCurrentSection] = useState(1); // Track the current section
-
-  const [formData, setFormData] = useState({
-    projectNumber: '',
-    client: '',
-    projectName: '',
-    summary: '',
-    startDate: '',
-    endDate: '',
-    scope:'GREEN',
-    schedule:'GREEN',
-    quality: 'GREEN',
-    customerSatisfaction:'GREEN',
-    issueRisk: '',
-    impact: '',
-    mitigationPlan: '',
-    activitiesThisWeek: '',
-    activitiesNextWeek: '',
-    highlights: '',
-    support: '',
-    expansionOpportunities: '',
-    chennaiLead:'',
-    londonLead:''
-  });
-
-    // State to track form validation errors
-    const [formErrors, setFormErrors] = useState({});
-
-    const handleClose = () => {
-      setShow(false);
-      // Reset form validation errors when closing the modal
-      setFormErrors({});
-    };
-
-  const handleShow = () => setShow(true);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+function ProjectReport() {
+    const [show, setShow] = useState(false);
+    const [currentSection, setCurrentSection] = useState(1); // Track the current section
+  
+    const [formData, setFormData] = useState({
+      projectNumber: '',
+      client: '',
+      projectName: '',
+      summary: '',
+      startDate: '',
+      endDate: '',
+      scope:'GREEN',
+      schedule:'GREEN',
+      quality: 'GREEN',
+      customerSatisfaction:'GREEN',
+      issueRisk: '',
+      impact: '',
+      mitigationPlan: '',
+      activitiesThisWeek: '',
+      activitiesNextWeek: '',
+      highlights: '',
+      support: '',
+      expansionOpportunities: '',
+      chennaiLead:'',
+      londonLead:''
     });
-  };
-
-  const navigate = useNavigate()
-  const cookies = new Cookies();
-
-
-  const showReport = () =>{
-    navigate('/showReport')
-  }
-
-
-  const handleNext = () => {
-    // Validate the form before proceeding to the next section
-    const validateCurrentSection = () => {
-    const errors = {};
-    if (currentSection === 1){
-    if (!formData.projectNumber) {
-      errors.projectNumber = 'Field is mandatory!';
-    }
-    if (!formData.projectName) {
-      errors.projectName = 'Field is mandatory!';
-    }
-    if (!formData.client) {
-      errors.client = 'Field is mandatory!';
-    }
-    if (!formData.summary) {
-      errors.summary = 'Field is mandatory!';
-    }
-    if (!formData.startDate) {
-      errors.startDate = 'Field is mandatory!';
-    }
-    if (!formData.endDate) {
-      errors.endDate = 'Field is mandatory!';
-    }}
-
-    else if (currentSection === 2) {
-
-    if (!formData.scope) {
-      errors.summary = 'Field is mandatory!';
-    }
-    if (!formData.schedule) {
-      errors.schedule = 'Field is mandatory!';
-    }
-    if (!formData.quality) {
-      errors.quality = 'Field is mandatory!';
-    }
-    if (!formData.customerSatisfaction) {
-      errors.customerSatisfaction = 'Field is mandatory!';
-    }}
-
-    else if (currentSection === 3) {
-    if (!formData.issueRisk) {
-      errors.issueRisk = 'Field is mandatory!';
-    }
-    if (!formData.impact) {
-      errors.impact = 'Field is mandatory!';
-    }
-    if (!formData.mitigationPlan) {
-      errors.mitigationPlan = 'Field is mandatory!';
-    }}
-    else if (currentSection === 4) {
-    if (!formData.activitiesNextWeek) {
-      errors.activitiesNextWeek = 'Field is mandatory!';
-    }
-    if (!formData.activitiesThisWeek) {
-      errors.activitiesThisWeek = 'Field is mandatory!';
-    }}
-    else if (currentSection === 5) {
-    if (!formData.highlights) {
-      errors.highlights = 'Field is mandatory!';
-    }
-    if (!formData.support) {
-      errors.support = 'Field is mandatory!';
-    }
-    if (!formData.expansionOpportunities) {
-      errors.expansionOpportunities = 'Field is mandatory!';
-    }}
-    else if (currentSection === 6) {
-    if (!formData.chennaiLead) {
-      errors.chennaiLead = 'Field is mandatory!';
-    }
-    if (!formData.londonLead) {
-      errors.londonLead = 'Field is mandatory!';
-    }}
-
-    // Add validations for other mandatory fields
-    setFormErrors({
-      ...formErrors,
-      [`section${currentSection}`]: errors,
-    });
-
-    return Object.keys(errors).length === 0; // Return true if there are no errors
-  };
-
-  // Validate the current section
-  const isSectionValid = validateCurrentSection();
-
-  // If the current section is valid, move to the next section
-  if (isSectionValid) {
-    setCurrentSection(currentSection + 1);
-  }   
+  
+      // State to track form validation errors
+      const [formErrors, setFormErrors] = useState({});
+  
+      const handleClose = () => {
+        setShow(false);
+        // Reset form validation errors when closing the modal
+        setFormErrors({});
       };
-
-  const handlePrevious = () => {
-    setCurrentSection(currentSection - 1);
-  };
-
-  const handleSave = () => {
-    // Send formData to the server to save data
-    // Implement API call here
-    console.log('Saving data:', formData);
-
-    ProjectReportService.saveProjectReport(formData).
-    then((res)=>{
-      console.log(res);
-      if (res.data.message === "Report published successfully."){
-        toast.success(res.data.message,{autoClose:1000})
+  
+    const handleShow = () => setShow(true);
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    };
+  
+    const handleNext = () => {
+      // Validate the form before proceeding to the next section
+      const validateCurrentSection = () => {
+      const errors = {};
+      if (currentSection === 1){
+      if (!formData.projectNumber) {
+        errors.projectNumber = 'Field is mandatory!';
       }
-    }).catch((err)=>{
-      console.log("Frontend Error:=>",err);
-    })
-    handleClose();
-  };
-
-
-
-
-
-  useEffect(() => {
-    const token = cookies.get("token");
-    if (!token) {
-      navigate("/")
-      toast.error("Authentication failed! Please Login.", { autoClose: 1000 })
+      if (!formData.projectName) {
+        errors.projectName = 'Field is mandatory!';
+      }
+      if (!formData.client) {
+        errors.client = 'Field is mandatory!';
+      }
+      if (!formData.summary) {
+        errors.summary = 'Field is mandatory!';
+      }
+      if (!formData.startDate) {
+        errors.startDate = 'Field is mandatory!';
+      }
+      if (!formData.endDate) {
+        errors.endDate = 'Field is mandatory!';
+      }}
+  
+      else if (currentSection === 2) {
+  
+      if (!formData.scope) {
+        errors.summary = 'Field is mandatory!';
+      }
+      if (!formData.schedule) {
+        errors.schedule = 'Field is mandatory!';
+      }
+      if (!formData.quality) {
+        errors.quality = 'Field is mandatory!';
+      }
+      if (!formData.customerSatisfaction) {
+        errors.customerSatisfaction = 'Field is mandatory!';
+      }}
+  
+      else if (currentSection === 3) {
+      if (!formData.issueRisk) {
+        errors.issueRisk = 'Field is mandatory!';
+      }
+      if (!formData.impact) {
+        errors.impact = 'Field is mandatory!';
+      }
+      if (!formData.mitigationPlan) {
+        errors.mitigationPlan = 'Field is mandatory!';
+      }}
+      else if (currentSection === 4) {
+      if (!formData.activitiesNextWeek) {
+        errors.activitiesNextWeek = 'Field is mandatory!';
+      }
+      if (!formData.activitiesThisWeek) {
+        errors.activitiesThisWeek = 'Field is mandatory!';
+      }}
+      else if (currentSection === 5) {
+      if (!formData.highlights) {
+        errors.highlights = 'Field is mandatory!';
+      }
+      if (!formData.support) {
+        errors.support = 'Field is mandatory!';
+      }
+      if (!formData.expansionOpportunities) {
+        errors.expansionOpportunities = 'Field is mandatory!';
+      }}
+      else if (currentSection === 6) {
+      if (!formData.chennaiLead) {
+        errors.chennaiLead = 'Field is mandatory!';
+      }
+      if (!formData.londonLead) {
+        errors.londonLead = 'Field is mandatory!';
+      }}
+  
+      // Add validations for other mandatory fields
+      setFormErrors({
+        ...formErrors,
+        [`section${currentSection}`]: errors,
+      });
+  
+      return Object.keys(errors).length === 0; // Return true if there are no errors
+    };
+  
+    // Validate the current section
+    const isSectionValid = validateCurrentSection();
+  
+    // If the current section is valid, move to the next section
+    if (isSectionValid) {
+      setCurrentSection(currentSection + 1);
     }
-
-  },[])
-
-  const handleLogout = () => {
-    const cookies = new Cookies();
-    cookies.remove('role')
-    cookies.remove('Email')
-    cookies.remove('token')
-    navigate('/')
-  }
-
-
-
-
+      // console.log(errors)
+      // console.log(currentSection);
+  
+      // const sectionErrors = Object.keys(errors).filter(
+      //   (errorKey) => errorKey.startsWith(`section${currentSection}`)
+      // );
+      //     // Check if there are any validation errors
+      //     if (sectionErrors.length === 0) {
+      //       setCurrentSection(currentSection + 1);
+      //     }
+        
+          
+        };
+      
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
+    // const handleNext = () => {
+    //   setCurrentSection(currentSection + 1);
+    // };
+  
+    const handlePrevious = () => {
+      setCurrentSection(currentSection - 1);
+    };
+  
+    const handleSave = () => {
+      // Send formData to the server to save data
+      // Implement API call here
+      console.log('Saving data:', formData);
+  
+      ProjectReportService.saveProjectReport(formData).
+      then((res)=>{
+        console.log(res);
+        if (res.data.message === "Report published successfully."){
+          toast.success(res.data.message,{autoClose:1000})
+        }
+      }).catch((err)=>{
+        console.log("Frontend Error:=>",err);
+      })
+      handleClose();
+    };
   return (
     <>
-      <Navbar bg="light" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand >Weekly Status Project Tracker</Navbar.Brand>
-          <Nav className="me-auto">
-            <Button variant="primary" id='ReportButton' onClick={handleLogout}>Logout</Button>
-          </Nav>
-        </Container>
-      </Navbar>
-      <br />
+    
 
-      <div>
-        <Button variant="primary" onClick={handleShow}>
-          Create Weekly Project Status
-        </Button>
-
-        <Button variant="success" onClick={showReport}>
-          Show Report
-        </Button>
-
-        <Modal show={show} onHide={handleClose} size="lg">
+    <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
             <Modal.Title>Weekly Project Status</Modal.Title>
           </Modal.Header>
@@ -616,9 +601,12 @@ function Dashboard(props) {
             )}
           </Modal.Footer>
         </Modal>
-      </div>
+    
     </>
-  )
+  
 
+
+  )
 }
-export default Dashboard;
+
+export default ProjectReport

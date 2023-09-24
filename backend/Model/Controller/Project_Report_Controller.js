@@ -6,7 +6,7 @@ const Store_project_report_data = async (req, res) => {
         console.log(req.body);
 
         
-        if(req.body.projectNumber&&req.body.client&&req.body.projectName&&req.body.summary&&req.body.startDate&&req.body.endDate&&req.body.scope&&req.body.schedule&&req.body.quality&&req.body.customerSatisfaction&&req.body.issueRisk&&req.body.impact&&req.body.mitigationPlan&&req.body.activitiesThisWeek&&req.body.activitiesNextWeek&&req.body.highlights&& req.body.support&& req.body.required&&req.body.expansionOpportunities&&
+        if(req.body.projectNumber&&req.body.client&&req.body.projectName&&req.body.summary&&req.body.startDate&&req.body.endDate&&req.body.scope&&req.body.schedule&&req.body.quality&&req.body.customerSatisfaction&&req.body.issueRisk&&req.body.impact&&req.body.mitigationPlan&&req.body.activitiesThisWeek&&req.body.activitiesNextWeek&&req.body.highlights&& req.body.support&&req.body.expansionOpportunities&&
             req.body.chennaiLead&&req.body.londonLead ){
 
                 const WeeklyReport = await ProjectReport.create({
@@ -27,7 +27,6 @@ const Store_project_report_data = async (req, res) => {
                     activitiesThisWeek:req.body.activitiesThisWeek,
                     highlights:req.body.highlights,
                     support:req.body.support,
-                    required:req.body.required,
                     expansionOpportunities:req.body.expansionOpportunities,
                     chennaiLead:req.body.chennaiLead,
                     londonLead:req.body.londonLead
