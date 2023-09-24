@@ -392,7 +392,7 @@ function ShowReport(props) {
                         </div></td>
                 <td className='td'>{format(new Date(projectData.startDate), 'dd/MM/yyyy')}</td>
                 <td className='td'>{format(new Date(projectData.endDate), 'dd/MM/yyyy')}</td>
-                <td className='td' ><button onClick={()=>getReport(projectData.Id)}>Show Report</button></td>
+                <td className='td' ><Button variant="primary"  onClick={()=>getReport(projectData.Id)}>Show Report</Button></td>
                 <td>
                 </td>
               </tr>
