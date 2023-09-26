@@ -43,8 +43,7 @@ db.sequelize=sequelize;
 
 db.UserRegTable=require("./UserRegistration")(sequelize,DataTypes);
 db.ProjectReportTable=require("./ProjectReport")(sequelize,DataTypes);
-// db.TrainingTable=require("./TrainingDetails")(sequelize,DataTypes);
-// db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
+db.EmployeeTable=require("./Employee")(sequelize,DataTypes);
 
 
 

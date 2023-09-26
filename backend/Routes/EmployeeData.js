@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 //controller is for applying business logic
 //here we are taking the insert logic from controller and save in varaible admin
-var ProjectDataByRouter =require("../Model/Controller/ProjectDataById_Controller")
+var EmployeeRouter =require("../Model/Controller/EmployeeData_Controller")
 
 
 // router.get("/",(req,res)=>{
@@ -11,7 +11,7 @@ var ProjectDataByRouter =require("../Model/Controller/ProjectDataById_Controller
 
 //while api calls this the particular action happens in the database eg. here we are inserting records
 
-router.get('/:id',ProjectDataByRouter.getProjectDataById)
+router.get('/:projectNumber',EmployeeRouter.getEmployeeData)
 
 
 module.exports = router;

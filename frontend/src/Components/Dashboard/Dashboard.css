@@ -30,3 +30,10 @@ margin-left: 80%;
   .Title{
     font-weight: bold;
   }
+
+  .FormHeader{
+    font-weight: bold !important;
+    color:  white !important;
+    background-color: #19105B  !important;
+    width: 100%;
+  }

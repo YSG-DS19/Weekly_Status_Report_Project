@@ -1,14 +1,20 @@
+.body{
+  font-family: Arial, Helvetica, sans-serif !important;
+  
+}
 .tf,
 .td {
   padding: 5px !important;
   text-align: center !important;
   border: 1px solid rgb(184, 184, 184) !important;
   height: 10px !important;
+  color: #19105B;
 }
 
 .tf {
-  background-color: #f4a7c6 !important;
-  color: black
+  background-color:  #19105B !important;
+  color: white;
+  font-weight: bold;
 }
 
 .Title{
@@ -18,3 +24,9 @@
 #tabletitle{
   margin-left: 30% !important;
 }
+
+
+#button{
+  background-color: #FF6196 !important;
+}
+

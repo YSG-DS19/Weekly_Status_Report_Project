@@ -3,7 +3,7 @@ const ProjectReport = db.ProjectReportTable;
 
 
 const Store_project_report_data = async (req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
 
         
         if(req.body.projectNumber&&req.body.client&&req.body.projectName&&req.body.summary&&req.body.startDate&&req.body.endDate&&req.body.scope&&req.body.schedule&&req.body.quality&&req.body.customerSatisfaction&&req.body.issueRisk&&req.body.impact&&req.body.mitigationPlan&&req.body.activitiesThisWeek&&req.body.activitiesNextWeek&&req.body.highlights&& req.body.support&&req.body.expansionOpportunities&&

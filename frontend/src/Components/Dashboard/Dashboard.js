@@ -26,7 +26,7 @@ function Dashboard(props) {
     schedule:'GREEN',
     quality: 'GREEN',
     customerSatisfaction:'GREEN',
-    issueRisk: '',
+    issueRisk: '• ',
     impact: '',
     mitigationPlan: '',
     activitiesThisWeek: '',
@@ -59,7 +59,7 @@ function Dashboard(props) {
 
   const navigate = useNavigate()
   const cookies = new Cookies();
-
+  cookies.get("token");
 
   const showReport = () =>{
     navigate('/showReport')
@@ -207,7 +207,7 @@ function Dashboard(props) {
     <>
       <Navbar bg="light" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand >Weekly Status Project Tracker</Navbar.Brand>
+          <Navbar.Brand className='textBold' >Weekly Status Project Tracker</Navbar.Brand>
           <Nav className="me-auto">
             <Button variant="primary" id='ReportButton' onClick={handleLogout}>Logout</Button>
           </Nav>
@@ -216,17 +216,17 @@ function Dashboard(props) {
       <br />
 
       <div>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary"  id ="button" onClick={handleShow}>
           Create Weekly Project Status
         </Button>
 
-        <Button variant="success" onClick={showReport}>
+        <Button variant="success"  onClick={showReport}>
           Show Report
         </Button>
 
         <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
-            <Modal.Title>Weekly Project Status</Modal.Title>
+            <Modal.Title className='FormHeader text-center'>Weekly Project Status</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Conditional rendering of form sections based on currentSection */}
@@ -234,7 +234,7 @@ function Dashboard(props) {
               <div>
                 {/* Form Section 1 */}
                 <Form.Group controlId="projectNumber">
-                  <label className="Title">Project Number</label>
+                  <label className="Title textBold">Project Number</label>
                   <Form.Control
                     type="text"
                     name="projectNumber"
@@ -251,7 +251,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="projectName">
-                <label className="Title">Project Name</label>
+                <label className="Title textBold">Project Name</label>
                   <Form.Control
                     type="text"
                     name="projectName"
@@ -267,7 +267,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="client">
-                  <label className='Title'>Client</label>
+                  <label className='Title textBold'>Client</label>
                   <Form.Control
                     type="text"
                     name="client"
@@ -283,7 +283,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="summary">
-                  <label className='Title'>Brief Summary</label>
+                  <label className='Title textBold'>Brief Summary</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
@@ -299,7 +299,7 @@ function Dashboard(props) {
                 )}
                 </Form.Group>
                 <Form.Group controlId="startDate">
-                  <label className='Title'>Start Date</label>
+                  <label className='Title textBold'>Start Date</label>
                   <Form.Control
                     type="date"
                     name="startDate"
@@ -314,7 +314,7 @@ function Dashboard(props) {
                 )}
                 </Form.Group>
                 <Form.Group controlId="endDate">
-                  <label className='Title'>End Date</label>
+                  <label className='Title textBold'>End Date</label>
                   <Form.Control
                     type="date"
                     name="endDate"
@@ -337,10 +337,10 @@ function Dashboard(props) {
             {currentSection === 2 && (
               <div>
               <Form.Group controlId="scope">
-                <label className='Title'>Scope</label>
+                <label className='Title textBold'>Scope</label>
                 <div className="color-picker">
                   <Form.Control as="select" name="scope" value={formData.scope} onChange={handleInputChange} required>
-                    <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
+                    <option  value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
                     <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
                     <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
                   </Form.Control>
@@ -354,7 +354,7 @@ function Dashboard(props) {
               </Form.Group>
 
                 <Form.Group controlId="schedule">
-                  <label className='Title'>Schedule</label>
+                  <label className='Title textBold'>Schedule</label>
                   <div className="color-picker">
                   <Form.Control as="select" name="schedule" value={formData.schedule} onChange={handleInputChange} required>
                     <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
@@ -371,7 +371,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="quality">
-                  <label className='Title'>Quality</label>
+                  <label className='Title textBold'>Quality</label>
                   <div className="color-picker">
                   <Form.Control as="select" name="quality" value={formData.quality} onChange={handleInputChange} required>
                     <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
@@ -388,7 +388,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="customerSatisfaction">
-                  <label className='Title'>Customer Satisfaction</label>
+                  <label className='Title textBold'>Customer Satisfaction</label>
                   <div className="color-picker">
                   <Form.Control as="select" name="customerSatisfaction" value={formData.customerSatisfaction} onChange={handleInputChange} required>
                     <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
@@ -410,13 +410,14 @@ function Dashboard(props) {
               <div>
                 {/* Form Section 3 */}
                 <Form.Group controlId="issueRisk">
-                  <label className='Title'>Issue/Risk</label>
+                  <label className='Title textBold'>Issue/Risk</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="issueRisk"
                     value={formData.issueRisk}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                                  {formErrors.issueRisk && (
@@ -427,13 +428,14 @@ function Dashboard(props) {
                 </Form.Group>
  
                 <Form.Group controlId="impact">
-                  <label className='Title'>Impact</label>
+                  <label className='Title textBold'>Impact</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="impact"
                     value={formData.impact}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                                {formErrors.impact && (
@@ -443,13 +445,14 @@ function Dashboard(props) {
                 )}
                 </Form.Group>
                 <Form.Group controlId="mitigationPlan">
-                  <label className='Title'>Mitigation Plan</label>
+                  <label className='Title textBold'>Mitigation Plan</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="mitigationPlan"
                     value={formData.mitigationPlan}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                                {formErrors.mitigationPlan && (
@@ -466,13 +469,14 @@ function Dashboard(props) {
               <div>
                 {/* Form Section 4 */}
                 <Form.Group controlId="activitiesThisWeek">
-                  <label className='Title'>Activity plan for this week & Status </label>
+                  <label className='Title textBold'>Activity plan for this week & Status </label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="activitiesThisWeek"
                     value={formData.activitiesThisWeek}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />    {formErrors.activitiesThisWeek && (
                     <Form.Text className="text-danger">
@@ -481,13 +485,14 @@ function Dashboard(props) {
                   )}
                 </Form.Group>
                 <Form.Group controlId="activitiesNextWeek">
-                  <label className='Title'>Activity plan for next week</label>
+                  <label className='Title textBold'>Activity plan for next week</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="activitiesNextWeek"
                     value={formData.activitiesNextWeek}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                   {formErrors.activitiesNextWeek && (
@@ -505,13 +510,14 @@ function Dashboard(props) {
               <div>
                 {/* Form Section 5 */}
                 <Form.Group controlId="highlights">
-                  <label className='Title'>Key Hightlights</label>
+                  <label className='Title textBold'>Key Hightlights</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="highlights"
                     value={formData.highlights}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                   {formErrors.highlights && (
@@ -521,13 +527,14 @@ function Dashboard(props) {
                 )}
                 </Form.Group>
                 <Form.Group controlId="support">
-                  <label className='Title'>Support Required</label>
+                  <label className='Title textBold'>Support Required</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="support"
                     value={formData.support}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                   {formErrors.support && (
@@ -537,13 +544,14 @@ function Dashboard(props) {
                 )}
                 </Form.Group>
                 <Form.Group controlId="expansionOpportunities">
-                  <label className='Title'>Expansion Opportunities</label>
+                  <label className='Title textBold'>Expansion Opportunities</label>
                   <Form.Control
                     as="textarea"
                     rows={3}
                     name="expansionOpportunities"
                     value={formData.expansionOpportunities}
                     onChange={handleInputChange}
+                    placeholder="Please use a bullet '•' for each point"
                     required
                   />
                   {formErrors.expansionOpportunities && (
@@ -559,7 +567,7 @@ function Dashboard(props) {
             {currentSection === 6 && (
               <div>
                 <Form.Group controlId="chennaiLead">
-                  <label className="Title">Chennai Lead</label>
+                  <label className="Title textBold">Chennai Lead</label>
                   <Form.Control
                     type="text"
                     name="chennaiLead"
@@ -575,7 +583,7 @@ function Dashboard(props) {
                 </Form.Group>
 
                 <Form.Group controlId="londonLead">
-                  <label className="Title">London Lead</label>
+                  <label className="Title textBold">London Lead</label>
                   <Form.Control
                     type="text"
                     name="londonLead"
@@ -598,19 +606,19 @@ function Dashboard(props) {
           <Modal.Footer>
             {/* Render "Previous" button if not on the first section */}
             {currentSection > 1 && (
-              <Button variant="secondary" onClick={handlePrevious}>
+              <Button variant="secondary" className='textBoldPink' onClick={handlePrevious}>
                 Previous
               </Button>
             )}
             {/* Render "Next" button if not on the last section */}
             {currentSection < 6 && (
-              <Button variant="primary" onClick={handleNext}>
+              <Button variant="primary" className='textBoldNavyBlue' onClick={handleNext}>
                 Next
               </Button>
             )}
             {/* Render "Save" button on the last section */}
             {currentSection === 6 && (
-              <Button variant="primary" onClick={handleSave}>
+              <Button variant="primary" className='textBoldNavyBlue' onClick={handleSave}>
                 Save
               </Button>
             )}

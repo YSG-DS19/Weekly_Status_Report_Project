@@ -2,7 +2,7 @@ const db = require("../Entities");
 const ProjectReport = db.ProjectReportTable;
 
 const getProjectData = async (req, res) => {
-    console.log(req.body);
+    console.log("body",req.body);
     try{
        
         const ProjectData = await ProjectReport.findAll();

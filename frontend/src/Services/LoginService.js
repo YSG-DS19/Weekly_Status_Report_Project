@@ -1,6 +1,7 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-
+const cookies = new Cookies();
 // for SignUp
 const saveUserDetails = async(data)=>{
     console.log("HHJBDADAS",data)

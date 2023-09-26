@@ -37,13 +37,19 @@ function ShowReport(props) {
   // });
 
   const [projectData, setProjectData] = useState([])
+  const cookies = new Cookies();
+  const token = cookies.get("token");
 
   const handleClose = () => setShow(false);
 
 
+
+
+
   const handleShow = () => {
+    
     setShow(true);
-    ProjectReportService.getProjectStatusData().
+    ProjectReportService.getProjectStatusData(token).
       then((res) => {
         console.log(res)
         console.log(res.data.ProjectDataFrontend);
@@ -74,7 +80,7 @@ function ShowReport(props) {
 
 
   const navigate = useNavigate()
-  const cookies = new Cookies();
+
 
 
 
@@ -94,8 +100,9 @@ function ShowReport(props) {
   //   handleClose();
   // };
 
-  const getReport =(id)=>{
-    navigate(`/reportDashoard/${id}`)
+  const getReport =(id,project_no)=>{
+    // navigate(`/reportDashoard/${id}`)
+    navigate(`/reportDashoard/${id}`,{state: { data: project_no }})
   }
 
 
@@ -192,7 +199,7 @@ function ShowReport(props) {
                     </div>
                     <div className='col'>
                       <Form.Group controlId="schedule">
-                        <Form.Label className='Title'>Schedule  </Form.Label>
+                        <Form.Label className='Title'>Schedule    </Form.Label>
                         <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: firstObject?.schedule }}></div>
                         </div>
@@ -340,7 +347,7 @@ function ShowReport(props) {
       </div>
 
 
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" id= "button" onClick={handleShow}>
         Get Report
       </Button>
 
@@ -351,13 +358,15 @@ function ShowReport(props) {
               <td className="tf">Project Number</td>
               <td className="tf">Project Name</td>
               <td className="tf">Client</td>
-              <td className="tf">Brief Summary</td>
+              {/* <td className="tf">Brief Summary</td> */}
               <td className="tf">Scope</td>
               <td className="tf">Schedule</td>
               <td className="tf">Quality</td>
               <td className="tf">C*Sat</td>
-              <td className='tf'>Start Date</td>
-              <td className='tf'>Start Date</td>
+              <td className="tf">Chennai Lead</td>
+              <td className="tf">London Lead</td>
+              {/* <td className='tf'>Start Date</td> */}
+              <td className='tf'>End Date</td>
               <td className="tf">Get Report</td>
               {/* <td className="tf">Location/Meeting Link</td>
                     <td className="tf">Description</td>
@@ -371,7 +380,7 @@ function ShowReport(props) {
                 <td className='td'>{projectData.projectNumber}</td>
                 <td className='td'>{projectData.projectName}</td>
                 <td className='td'>{projectData.client}</td>
-                <td className='td'>{projectData.summary}</td>
+                {/* <td className='td'>{projectData.summary}</td> */}
                 <td className='td'>
                 <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: projectData?.scope }}></div>
@@ -390,9 +399,11 @@ function ShowReport(props) {
                 <td className='td'><div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: projectData?.customerSatisfaction }}></div>
                         </div></td>
-                <td className='td'>{format(new Date(projectData.startDate), 'dd/MM/yyyy')}</td>
+                {/* <td className='td'>{format(new Date(projectData.startDate), 'dd/MM/yyyy')}</td> */}
+                <td className='td'>{projectData.chennaiLead}</td>
+                <td className='td'>{projectData.londonLead}</td>
                 <td className='td'>{format(new Date(projectData.endDate), 'dd/MM/yyyy')}</td>
-                <td className='td' ><Button variant="primary"  onClick={()=>getReport(projectData.Id)}>Show Report</Button></td>
+                <td className='td' ><Button variant="primary" id="button" onClick={()=>getReport(projectData.Id,projectData.projectNumber)}>Show Report</Button></td>
                 <td>
                 </td>
               </tr>

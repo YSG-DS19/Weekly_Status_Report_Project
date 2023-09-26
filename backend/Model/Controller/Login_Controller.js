@@ -16,7 +16,7 @@ const logindetailscheck = async (req, res) => {
         console.log(existingUser,"BAckend signin")
       if (existingUser) {
 
-        const token = jwt.sign({email: existingUser.Email}, 'JMAN_USER_LOGIN',{expiresIn: "2d",});
+        const token = jwt.sign({email: existingUser.Email}, process.env.SECRET_KEY,{expiresIn: "2d",});
 
         // Update the JWT column in the backend database
         // await existingUser.update({ JWT: token });

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors=require('cors');
 const jwt = require('jsonwebtoken');
-
+var bodyparser = require('body-parser')
 
 var app = express();
 
@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.disable('etag');
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 
 
 var indexRouter = require('./routes/index');
@@ -36,14 +38,19 @@ var userCreationRouter = require('./Routes/UserRegistration');
 var loginRouter = require('./Routes/Login'); 
 var projectReportRouter = require('./Routes/ProjectReport')
 var getProjectDataRouter = require('./Routes/GetProjectData')
-var projectDataById = require('./Routes/ProjectDataById')
+var projectDataById = require('./Routes/ProjectDataById');
+var EmpDataRouter = require('./Routes/EmployeeData')
+
+// Middleware to Authenticate User 
+const ValidateUser = require('./Middlware/ValidateUser');
+
 // All Customize Router 
 app.use('/signup',userCreationRouter);
 app.use('/login',loginRouter)
 app.use('/projectReport',projectReportRouter)
-app.use('/getprojectdata',getProjectDataRouter)
-app.use( `reportDashboard/:id`,projectDataById)
-
+app.use('/getprojectdata', ValidateUser,getProjectDataRouter)
+app.use( '/reportDashboard/',ValidateUser,projectDataById)
+app.use('/getEmpData/',ValidateUser,EmpDataRouter)
 
 
 
