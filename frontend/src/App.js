@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Signup from './Components/Login/Signup';
-import Dashboard from './Components/Dashboard/Dashboard';
+import Dashboard from './Components/Dashboard/StatusForm';
 import ProjectReport from './Components/ProjectReportForm/ProjectReport';
 import ShowReport from './Components/Dashboard/ShowReport';
 import ReportDashboard from './Components/Dashboard/ReportDashboard';

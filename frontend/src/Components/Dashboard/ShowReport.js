@@ -5,45 +5,24 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import './ShowReport.css'
 import { format } from 'date-fns';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { toast } from 'react-toastify';
+import StatusForm from './StatusForm';
+import {AiFillEdit,AiFillDelete} from 'react-icons/ai'
 
 
 function ShowReport(props) {
 
   const [show, setShow] = useState(false);
   const [currentSection, setCurrentSection] = useState(1);
-
-  // const [formData, setFormData] = useState({
-  //   projectNumber: '',
-  //   client: '',
-  //   projectName: '',
-  //   summary: '',
-  //   startDate: '',
-  //   endDate: '',
-  //   scope: '',
-  //   schedule: '',
-  //   quality: '',
-  //   customerSatisfaction: '',
-  //   issueRisk: '',
-  //   impact: '',
-  //   mitigationPlan: '',
-  //   activitiesThisWeek: '',
-  //   activitiesNextWeek: '',
-  //   highlights: '',
-  //   support: '',
-  //   expansionOpportunities: '',
-  //   chennaiLead: '',
-  //   londonLead: '',
-
-  // });
-
   const [projectData, setProjectData] = useState([])
+
+  const navigate = useNavigate()
   const cookies = new Cookies();
   const token = cookies.get("token");
 
   const handleClose = () => setShow(false);
-
-
-
 
 
   const handleShow = () => {
@@ -55,10 +34,7 @@ function ShowReport(props) {
         console.log(res.data.ProjectDataFrontend);
         setProjectData(res.data.ProjectDataFrontend)
 
-        // console.log(projectData.map((data,index)=>{
-        //   console.log(data);
-
-        // }));
+ 
       }).catch(err => {
         console.log("Error", err)
       })
@@ -68,18 +44,6 @@ function ShowReport(props) {
   var firstObject = projectData[0];
   console.log("projectData[0]", firstObject?.projectName);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
-
-
-
-  const navigate = useNavigate()
 
 
 
@@ -116,25 +80,52 @@ function ShowReport(props) {
   // Get the CSS class based on the scope value
   const scopeClassName = scopeClassMapping[firstObject?.scope] || '';
 
+
+
+
+  // const showReport = () =>{
+  //   navigate('/showReport')
+  // }
+
+
+  // useEffect(() => {
+  //   // getReport()
+  //   const token = cookies.get("token");
+  //   if (!token) {
+  //     navigate("/")
+  //     toast.error("Authentication failed! Please Login.", { autoClose: 1000 })
+  //   }
+
+  // },[])
+
+  // const handleLogout = () => {
+  //   const cookies = new Cookies();
+  //   cookies.remove('role')
+  //   cookies.remove('Email')
+  //   cookies.remove('token')
+  //   navigate('/')
+  // }
+
+
   return (
     <>
       <div>
         {/* <Button variant="primary" onClick={handleShow}>
         Get Report
       </Button> */}
-
+      <StatusForm/>
         <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
-            <Modal.Title className="Title">Weekly Project Status Report of {firstObject?.projectName}</Modal.Title>
+            <Modal.Title className="Title FormHeader text-center">Weekly Project Status Report of {firstObject?.projectName}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Conditional rendering of form sections based on currentSection */}
             {currentSection === 1 && (
               <Card>
-                <Card.Header className="Title" >Project Details</Card.Header>
+                <Card.Header className=" FormHeader text-center Title" >Project Details</Card.Header>
                 <Card.Body>
                   <Form.Group controlId="projectNumber">
-                    <Form.Label className="Title" >Project Number</Form.Label>
+                    <Form.Label className="Title textBold" >Project Number</Form.Label>
                     <Form.Control
                       type="text"
                       name="projectNumber"
@@ -143,7 +134,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="client">
-                    <Form.Label className="Title">Client</Form.Label>
+                    <Form.Label className="Title textBold">Client</Form.Label>
                     <Form.Control
                       type="text"
                       name="client"
@@ -152,7 +143,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="projectName">
-                    <Form.Label className="Title">Project Name</Form.Label>
+                    <Form.Label className="Title textBold">Project Name</Form.Label>
                     <Form.Control
                       type="text"
                       name="projectName"
@@ -161,7 +152,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="summary">
-                    <Form.Label className="Title">Description</Form.Label>
+                    <Form.Label className="Title textBold ">Description</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -191,7 +182,7 @@ function ShowReport(props) {
                   <div className='row mt-4 mb-3'>
                     <div className='col'>
                       <Form.Group controlId="scope">
-                        <Form.Label className='Title'>Scope</Form.Label>
+                        <Form.Label className='Title textBold'>Scope</Form.Label>
                         <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: firstObject?.scope }}></div>
                         </div>
@@ -199,7 +190,7 @@ function ShowReport(props) {
                     </div>
                     <div className='col'>
                       <Form.Group controlId="schedule">
-                        <Form.Label className='Title'>Schedule    </Form.Label>
+                        <Form.Label className='Title textBold'>Schedule    </Form.Label>
                         <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: firstObject?.schedule }}></div>
                         </div>
@@ -208,8 +199,8 @@ function ShowReport(props) {
                     <div className='col'>
 
 
-                      <Form.Group controlId="quality">
-                        <Form.Label className='Title'>Quality</Form.Label>
+                      <Form.Group controlId="quality ">
+                        <Form.Label className='Title textBold'>Quality</Form.Label>
                         <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: firstObject?.quality }}></div>
                         </div>
@@ -217,7 +208,7 @@ function ShowReport(props) {
                     </div>
                     <div className='col'>
                       <Form.Group controlId="customerSatisfaction">
-                        <Form.Label className='Title'>CSat* </Form.Label>
+                        <Form.Label className='Title textBold'>CSat* </Form.Label>
                         <div className="color-picker">
                           <div className="color-preview" style={{ backgroundColor: firstObject?.customerSatisfaction }}></div>
                         </div>
@@ -231,14 +222,14 @@ function ShowReport(props) {
 
             {currentSection === 3 && (
               <div>
-                <h5 className="Title" id="tabletitle">Key Issues/Risks</h5>
+                <h5 className="Title FormHeader text-center">Key Issues/Risks</h5>
                 <Table striped bordered hover>
 
                   <thead>
                     <tr>
-                      <th>Issue/ Risk</th>
-                      <th>Impact</th>
-                      <th>Mitigation Plan</th>
+                      <th className='textBold'>Issue/ Risk</th>
+                      <th className='textBold'>Impact</th>
+                      <th className='textBold'>Mitigation Plan</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -255,10 +246,10 @@ function ShowReport(props) {
 
             {currentSection === 4 && (
               <Card>
-                <Card.Header className="Title">Project Activities</Card.Header>
+                <Card.Header className="Title FormHeader text-center">Project Activities</Card.Header>
                 <Card.Body>
                   <Form.Group controlId="activitiesThisWeek">
-                    <Form.Label className="Title">Activities This Week</Form.Label>
+                    <Form.Label className="Title textBold">Activities This Week</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -268,7 +259,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="activitiesNextWeek">
-                    <Form.Label className="Title">Activities Next Week</Form.Label>
+                    <Form.Label className="Title textBold">Activities Next Week</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -284,10 +275,10 @@ function ShowReport(props) {
 
             {currentSection === 5 && (
               <Card>
-                <Card.Header className="Title">Project Highlights</Card.Header>
+                <Card.Header className="Title FormHeader text-center">Project Highlights</Card.Header>
                 <Card.Body>
                   <Form.Group controlId="highlights">
-                    <Form.Label className="Title">Highlights</Form.Label>
+                    <Form.Label className="Title textBold">Highlights</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -297,7 +288,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="support">
-                    <Form.Label className="Title">Support</Form.Label>
+                    <Form.Label className="Title textBold">Support Required</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -307,7 +298,7 @@ function ShowReport(props) {
                     />
                   </Form.Group>
                   <Form.Group controlId="expansionOpportunities">
-                    <Form.Label className="Title">Expansion Opportunities</Form.Label>
+                    <Form.Label className="Title textBold">Expansion Opportunities</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={3}
@@ -323,21 +314,21 @@ function ShowReport(props) {
 
             {currentSection === 6 && (
               <div className="lead-names">
-                <div className="lead-name"><label className="Title">Chennai Lead:</label> {firstObject?.chennaiLead}</div>
-                <div className="lead-name"><label className="Title">London Lead:</label> {firstObject?.londonLead}</div>
+                <div className="lead-name"><label className="Title textBold">Chennai Lead :</label> {firstObject?.chennaiLead}</div>
+                <div className="lead-name"><label className="Title textBold">London Lead  :</label> {firstObject?.londonLead}</div>
               </div>
             )}
           </Modal.Body>
           <Modal.Footer>
             {/* Render "Previous" button if not on the first section */}
             {currentSection > 1 && (
-              <Button variant="secondary" onClick={handlePrevious}>
+              <Button variant="secondary" className='textBoldPink' onClick={handlePrevious}>
                 Previous
               </Button>
             )}
             {/* Render "Next" button if not on the last section */}
             {currentSection < 6 && (
-              <Button variant="primary" onClick={handleNext}>
+              <Button variant="primary" className='textBoldNavyBlue' onClick={handleNext}>
                 Next
               </Button>
             )}
@@ -346,32 +337,28 @@ function ShowReport(props) {
         </Modal>
       </div>
 
-
-      <Button variant="primary" id= "button" onClick={handleShow}>
+      <div className='floatRight'>
+      <Button variant="primary"  className='textBoldPink floatRight' onClick={handleShow}>
         Get Report
       </Button>
-
-      <div className="table-responsive">
+      </div>
+      <div className="table-responsive m-3">
         <Table className="table-responsive table table-hover table-borderless">
           <thead className='tableheadings'>
             <tr>
               <td className="tf">Project Number</td>
               <td className="tf">Project Name</td>
               <td className="tf">Client</td>
-              {/* <td className="tf">Brief Summary</td> */}
               <td className="tf">Scope</td>
               <td className="tf">Schedule</td>
               <td className="tf">Quality</td>
               <td className="tf">C*Sat</td>
               <td className="tf">Chennai Lead</td>
               <td className="tf">London Lead</td>
-              {/* <td className='tf'>Start Date</td> */}
               <td className='tf'>End Date</td>
               <td className="tf">Get Report</td>
-              {/* <td className="tf">Location/Meeting Link</td>
-                    <td className="tf">Description</td>
-                    <td className="tf">Edit</td>
-                    <td className="tf">Delete</td> */}
+              <td className="tf">Edit</td>
+              <td className="tf">Delete</td>
             </tr>
           </thead>
           <tbody>
@@ -404,8 +391,8 @@ function ShowReport(props) {
                 <td className='td'>{projectData.londonLead}</td>
                 <td className='td'>{format(new Date(projectData.endDate), 'dd/MM/yyyy')}</td>
                 <td className='td' ><Button variant="primary" id="button" onClick={()=>getReport(projectData.Id,projectData.projectNumber)}>Show Report</Button></td>
-                <td>
-                </td>
+                <td className='td'><Button className='textBoldNavyBlue'><AiFillEdit/> </Button></td>
+                <td className='td'><Button className='textBoldPink'><AiFillDelete/> </Button></td>
               </tr>
             ))}
           </tbody>

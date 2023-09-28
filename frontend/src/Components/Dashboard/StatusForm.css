@@ -32,8 +32,36 @@ margin-left: 80%;
   }
 
   .FormHeader{
-    font-weight: bold !important;
+    font-weight: bolder !important;
     color:  white !important;
     background-color: #19105B  !important;
     width: 100%;
+  }
+
+  .floatRight{
+    float: center !important;
+  
+  }
+
+  .floatLeft{
+    float:left;
+    padding: 20px;
+  }
+
+  .Navbar{
+    display: flex;
+    justify-content: space-between;
+    border:2px solid black ;
+    background-color:  #19105B ;
+    height: 50px;
+  }
+
+  .NavHeader{
+    font-weight: bold !important;
+    color:  white !important;
+    background-color: #19105B  !important;
+    width: 20%;
+    font-size:x-large;
+    margin-left: 10px;
+  
   }

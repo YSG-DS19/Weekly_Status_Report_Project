@@ -56,7 +56,7 @@ function Login() {
       if (res.data.message==="Login Successful"){
         
         toast.success(res.data.message,{autoClose:500});
-        navigate("/dashboard")
+        navigate("/showReport")
         // setCookie('UserData',res.data.userdata)
         cookies.set("role",res.data.userdata.Role);
         const roles=cookies.get("role");

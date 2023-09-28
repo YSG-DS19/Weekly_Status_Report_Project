@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 // import Button from 'react-bootstrap/Button';
-import './Dashboard.css'
+import './StatusForm.css'
 import { Modal, Button, Form } from 'react-bootstrap';
 // import "textarea" from 'react-bootstrap'
 import { useEffect, useState } from 'react';
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import ProjectReportService from '../../Services/ProjectReportService';
 
-function Dashboard(props) {
+function StatusForm(props) {
   const [show, setShow] = useState(false);
   const [currentSection, setCurrentSection] = useState(1); // Track the current section
 
@@ -22,10 +22,10 @@ function Dashboard(props) {
     summary: '',
     startDate: '',
     endDate: '',
-    scope:'GREEN',
-    schedule:'GREEN',
+    scope: 'GREEN',
+    schedule: 'GREEN',
     quality: 'GREEN',
-    customerSatisfaction:'GREEN',
+    customerSatisfaction: 'GREEN',
     issueRisk: '• ',
     impact: '',
     mitigationPlan: '',
@@ -34,18 +34,18 @@ function Dashboard(props) {
     highlights: '',
     support: '',
     expansionOpportunities: '',
-    chennaiLead:'',
-    londonLead:''
+    chennaiLead: '',
+    londonLead: ''
   });
 
-    // State to track form validation errors
-    const [formErrors, setFormErrors] = useState({});
+  // State to track form validation errors
+  const [formErrors, setFormErrors] = useState({});
 
-    const handleClose = () => {
-      setShow(false);
-      // Reset form validation errors when closing the modal
-      setFormErrors({});
-    };
+  const handleClose = () => {
+    setShow(false);
+    // Reset form validation errors when closing the modal
+    setFormErrors({});
+  };
 
   const handleShow = () => setShow(true);
 
@@ -59,104 +59,110 @@ function Dashboard(props) {
 
   const navigate = useNavigate()
   const cookies = new Cookies();
-  cookies.get("token");
+  const token = cookies.get("token");
 
-  const showReport = () =>{
-    navigate('/showReport')
-  }
+  // const showReport = () => {
+  //   navigate('/showReport')
+  // }
 
 
   const handleNext = () => {
     // Validate the form before proceeding to the next section
     const validateCurrentSection = () => {
-    const errors = {};
-    if (currentSection === 1){
-    if (!formData.projectNumber) {
-      errors.projectNumber = 'Field is mandatory!';
-    }
-    if (!formData.projectName) {
-      errors.projectName = 'Field is mandatory!';
-    }
-    if (!formData.client) {
-      errors.client = 'Field is mandatory!';
-    }
-    if (!formData.summary) {
-      errors.summary = 'Field is mandatory!';
-    }
-    if (!formData.startDate) {
-      errors.startDate = 'Field is mandatory!';
-    }
-    if (!formData.endDate) {
-      errors.endDate = 'Field is mandatory!';
-    }}
+      const errors = {};
+      if (currentSection === 1) {
+        if (!formData.projectNumber) {
+          errors.projectNumber = 'Field is mandatory!';
+        }
+        if (!formData.projectName) {
+          errors.projectName = 'Field is mandatory!';
+        }
+        if (!formData.client) {
+          errors.client = 'Field is mandatory!';
+        }
+        if (!formData.summary) {
+          errors.summary = 'Field is mandatory!';
+        }
+        if (!formData.startDate) {
+          errors.startDate = 'Field is mandatory!';
+        }
+        if (!formData.endDate) {
+          errors.endDate = 'Field is mandatory!';
+        }
+      }
 
-    else if (currentSection === 2) {
+      else if (currentSection === 2) {
 
-    if (!formData.scope) {
-      errors.summary = 'Field is mandatory!';
-    }
-    if (!formData.schedule) {
-      errors.schedule = 'Field is mandatory!';
-    }
-    if (!formData.quality) {
-      errors.quality = 'Field is mandatory!';
-    }
-    if (!formData.customerSatisfaction) {
-      errors.customerSatisfaction = 'Field is mandatory!';
-    }}
+        if (!formData.scope) {
+          errors.summary = 'Field is mandatory!';
+        }
+        if (!formData.schedule) {
+          errors.schedule = 'Field is mandatory!';
+        }
+        if (!formData.quality) {
+          errors.quality = 'Field is mandatory!';
+        }
+        if (!formData.customerSatisfaction) {
+          errors.customerSatisfaction = 'Field is mandatory!';
+        }
+      }
 
-    else if (currentSection === 3) {
-    if (!formData.issueRisk) {
-      errors.issueRisk = 'Field is mandatory!';
-    }
-    if (!formData.impact) {
-      errors.impact = 'Field is mandatory!';
-    }
-    if (!formData.mitigationPlan) {
-      errors.mitigationPlan = 'Field is mandatory!';
-    }}
-    else if (currentSection === 4) {
-    if (!formData.activitiesNextWeek) {
-      errors.activitiesNextWeek = 'Field is mandatory!';
-    }
-    if (!formData.activitiesThisWeek) {
-      errors.activitiesThisWeek = 'Field is mandatory!';
-    }}
-    else if (currentSection === 5) {
-    if (!formData.highlights) {
-      errors.highlights = 'Field is mandatory!';
-    }
-    if (!formData.support) {
-      errors.support = 'Field is mandatory!';
-    }
-    if (!formData.expansionOpportunities) {
-      errors.expansionOpportunities = 'Field is mandatory!';
-    }}
-    else if (currentSection === 6) {
-    if (!formData.chennaiLead) {
-      errors.chennaiLead = 'Field is mandatory!';
-    }
-    if (!formData.londonLead) {
-      errors.londonLead = 'Field is mandatory!';
-    }}
+      else if (currentSection === 3) {
+        if (!formData.issueRisk) {
+          errors.issueRisk = 'Field is mandatory!';
+        }
+        if (!formData.impact) {
+          errors.impact = 'Field is mandatory!';
+        }
+        if (!formData.mitigationPlan) {
+          errors.mitigationPlan = 'Field is mandatory!';
+        }
+      }
+      else if (currentSection === 4) {
+        if (!formData.activitiesNextWeek) {
+          errors.activitiesNextWeek = 'Field is mandatory!';
+        }
+        if (!formData.activitiesThisWeek) {
+          errors.activitiesThisWeek = 'Field is mandatory!';
+        }
+      }
+      else if (currentSection === 5) {
+        if (!formData.highlights) {
+          errors.highlights = 'Field is mandatory!';
+        }
+        if (!formData.support) {
+          errors.support = 'Field is mandatory!';
+        }
+        if (!formData.expansionOpportunities) {
+          errors.expansionOpportunities = 'Field is mandatory!';
+        }
+      }
+      else if (currentSection === 6) {
+        if (!formData.chennaiLead) {
+          errors.chennaiLead = 'Field is mandatory!';
+        }
+        if (!formData.londonLead) {
+          errors.londonLead = 'Field is mandatory!';
+        }
+      }
 
-    // Add validations for other mandatory fields
-    setFormErrors({
-      ...formErrors,
-      [`section${currentSection}`]: errors,
-    });
+      // Add validations for other mandatory fields
+      setFormErrors({
+        ...formErrors,
+        [`section${currentSection}`]: errors,
+      });
 
-    return Object.keys(errors).length === 0; // Return true if there are no errors
+      return Object.keys(errors).length === 0; // Return true if there are no errors
+    };
+
+    // Validate the current section
+    const isSectionValid = validateCurrentSection();
+
+    // If the current section is valid, move to the next section
+    if (isSectionValid) {
+      setCurrentSection(currentSection + 1);
+    }
   };
-
-  // Validate the current section
-  const isSectionValid = validateCurrentSection();
-
-  // If the current section is valid, move to the next section
-  if (isSectionValid) {
-    setCurrentSection(currentSection + 1);
-  }   
-      };
 
   const handlePrevious = () => {
     setCurrentSection(currentSection - 1);
@@ -166,16 +172,16 @@ function Dashboard(props) {
     // Send formData to the server to save data
     // Implement API call here
     console.log('Saving data:', formData);
-
-    ProjectReportService.saveProjectReport(formData).
-    then((res)=>{
-      console.log(res);
-      if (res.data.message === "Report published successfully."){
-        toast.success(res.data.message,{autoClose:1000})
-      }
-    }).catch((err)=>{
-      console.log("Frontend Error:=>",err);
-    })
+    console.log('Token Frontend Dashboard>>>>>>:', token);
+    ProjectReportService.saveProjectReport(formData, token).
+      then((res) => {
+        console.log(res);
+        if (res.data.message === "Report published successfully.") {
+          toast.success(res.data.message, { autoClose: 1000 })
+        }
+      }).catch((err) => {
+        console.log("Frontend Error:=>", err);
+      })
     handleClose();
   };
 
@@ -190,7 +196,7 @@ function Dashboard(props) {
       toast.error("Authentication failed! Please Login.", { autoClose: 1000 })
     }
 
-  },[])
+  }, [])
 
   const handleLogout = () => {
     const cookies = new Cookies();
@@ -205,25 +211,23 @@ function Dashboard(props) {
 
   return (
     <>
-      <Navbar bg="light" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand className='textBold' >Weekly Status Project Tracker</Navbar.Brand>
-          <Nav className="me-auto">
-            <Button variant="primary" id='ReportButton' onClick={handleLogout}>Logout</Button>
-          </Nav>
-        </Container>
-      </Navbar>
-      <br />
-
-      <div>
-        <Button variant="primary"  id ="button" onClick={handleShow}>
+      <div className='Navbar'>
+          <label className='NavHeader' >Weekly Status Project Tracker</label>
+          
+          <Button variant="primary" className='textBoldPink' id="button" onClick={handleShow}>
           Create Weekly Project Status
         </Button>
+            <Button variant="primary" className='textBoldPink '  onClick={handleLogout}>Logout</Button>
+           
+            
+      
 
-        <Button variant="success"  onClick={showReport}>
+      </div>
+      <br />
+      <div>
+        {/* <Button variant="success" className='textBoldNavyBlue' onClick={showReport}>
           Show Report
-        </Button>
-
+        </Button> */}
         <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
             <Modal.Title className='FormHeader text-center'>Weekly Project Status</Modal.Title>
@@ -242,16 +246,16 @@ function Dashboard(props) {
                     onChange={handleInputChange}
                     required // Make the field mandatory
                   />
-                {/* Display error message if the field is required and not filled */}
-                {formErrors.projectNumber && (
-                  <Form.Text className="text-danger">
-                    {formErrors.projectNumber}
-                  </Form.Text>
-                )}
+                  {/* Display error message if the field is required and not filled */}
+                  {formErrors.projectNumber && (
+                    <Form.Text className="text-danger">
+                      {formErrors.projectNumber}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="projectName">
-                <label className="Title textBold">Project Name</label>
+                  <label className="Title textBold">Project Name</label>
                   <Form.Control
                     type="text"
                     name="projectName"
@@ -260,10 +264,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.projectName && (
-                  <Form.Text className="text-danger">
-                    {formErrors.projectName}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.projectName}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="client">
@@ -276,10 +280,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.client && (
-                  <Form.Text className="text-danger">
-                    {formErrors.client}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.client}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="summary">
@@ -293,10 +297,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.summary && (
-                  <Form.Text className="text-danger">
-                    {formErrors.summary}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.summary}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 <Form.Group controlId="startDate">
                   <label className='Title textBold'>Start Date</label>
@@ -307,11 +311,11 @@ function Dashboard(props) {
                     onChange={handleInputChange}
                     required
                   />
-                               {formErrors.startDate && (
-                  <Form.Text className="text-danger">
-                    {formErrors.startDate}
-                  </Form.Text>
-                )}
+                  {formErrors.startDate && (
+                    <Form.Text className="text-danger">
+                      {formErrors.startDate}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 <Form.Group controlId="endDate">
                   <label className='Title textBold'>End Date</label>
@@ -323,10 +327,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.endDate && (
-                  <Form.Text className="text-danger">
-                    {formErrors.endDate}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.endDate}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
 
@@ -336,72 +340,72 @@ function Dashboard(props) {
 
             {currentSection === 2 && (
               <div>
-              <Form.Group controlId="scope">
-                <label className='Title textBold'>Scope</label>
-                <div className="color-picker">
-                  <Form.Control as="select" name="scope" value={formData.scope} onChange={handleInputChange} required>
-                    <option  value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
-                    <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
-                    <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
-                  </Form.Control>
-                  <div className="color-preview" style={{ backgroundColor: formData.scope }}></div>
-                </div>
-                {formErrors.scope && (
-                  <Form.Text className="text-danger">
-                    {formErrors.scope}
-                  </Form.Text>
-                )}
-              </Form.Group>
+                <Form.Group controlId="scope">
+                  <label className='Title textBold'>Scope</label>
+                  <div className="color-picker">
+                    <Form.Control as="select" name="scope" value={formData.scope} onChange={handleInputChange} required>
+                      <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
+                      <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
+                      <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
+                    </Form.Control>
+                    <div className="color-preview" style={{ backgroundColor: formData.scope }}></div>
+                  </div>
+                  {formErrors.scope && (
+                    <Form.Text className="text-danger">
+                      {formErrors.scope}
+                    </Form.Text>
+                  )}
+                </Form.Group>
 
                 <Form.Group controlId="schedule">
                   <label className='Title textBold'>Schedule</label>
                   <div className="color-picker">
-                  <Form.Control as="select" name="schedule" value={formData.schedule} onChange={handleInputChange} required>
-                    <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
-                    <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
-                    <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
-                  </Form.Control>
-                  <div className="color-preview" style={{ backgroundColor: formData.schedule }}></div>
+                    <Form.Control as="select" name="schedule" value={formData.schedule} onChange={handleInputChange} required>
+                      <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
+                      <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
+                      <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
+                    </Form.Control>
+                    <div className="color-preview" style={{ backgroundColor: formData.schedule }}></div>
                   </div>
                   {formErrors.schedule && (
-                  <Form.Text className="text-danger">
-                    {formErrors.schedule}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.schedule}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="quality">
                   <label className='Title textBold'>Quality</label>
                   <div className="color-picker">
-                  <Form.Control as="select" name="quality" value={formData.quality} onChange={handleInputChange} required>
-                    <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
-                    <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
-                    <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
-                  </Form.Control>
-                  <div className="color-preview" style={{ backgroundColor: formData.quality }}></div>
+                    <Form.Control as="select" name="quality" value={formData.quality} onChange={handleInputChange} required>
+                      <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
+                      <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
+                      <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
+                    </Form.Control>
+                    <div className="color-preview" style={{ backgroundColor: formData.quality }}></div>
                   </div>
                   {formErrors.quality && (
-                  <Form.Text className="text-danger">
-                    {formErrors.quality}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.quality}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="customerSatisfaction">
                   <label className='Title textBold'>Customer Satisfaction</label>
                   <div className="color-picker">
-                  <Form.Control as="select" name="customerSatisfaction" value={formData.customerSatisfaction} onChange={handleInputChange} required>
-                    <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
-                    <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
-                    <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
-                  </Form.Control>
-                  <div className="color-preview" style={{ backgroundColor: formData.customerSatisfaction }}></div>
+                    <Form.Control as="select" name="customerSatisfaction" value={formData.customerSatisfaction} onChange={handleInputChange} required>
+                      <option value="GREEN" style={{ backgroundColor: 'green', color: 'white' }}>GREEN</option>
+                      <option value="#FF8C00" style={{ backgroundColor: '#FF8C00', color: 'white' }}>AMBER</option>
+                      <option value="RED" style={{ backgroundColor: 'red', color: 'white' }}>RED</option>
+                    </Form.Control>
+                    <div className="color-preview" style={{ backgroundColor: formData.customerSatisfaction }}></div>
                   </div>
                   {formErrors.customerSatisfaction && (
-                  <Form.Text className="text-danger">
-                    {formErrors.customerSatisfaction}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.customerSatisfaction}
+                    </Form.Text>
+                  )}
                 </Form.Group>
               </div>
             )}
@@ -420,13 +424,13 @@ function Dashboard(props) {
                     placeholder="Please use a bullet '•' for each point"
                     required
                   />
-                                 {formErrors.issueRisk && (
-                  <Form.Text className="text-danger">
-                    {formErrors.issueRisk}
-                  </Form.Text>
-                )}
+                  {formErrors.issueRisk && (
+                    <Form.Text className="text-danger">
+                      {formErrors.issueRisk}
+                    </Form.Text>
+                  )}
                 </Form.Group>
- 
+
                 <Form.Group controlId="impact">
                   <label className='Title textBold'>Impact</label>
                   <Form.Control
@@ -438,11 +442,11 @@ function Dashboard(props) {
                     placeholder="Please use a bullet '•' for each point"
                     required
                   />
-                               {formErrors.impact && (
-                  <Form.Text className="text-danger">
-                    {formErrors.impact}
-                  </Form.Text>
-                )}
+                  {formErrors.impact && (
+                    <Form.Text className="text-danger">
+                      {formErrors.impact}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 <Form.Group controlId="mitigationPlan">
                   <label className='Title textBold'>Mitigation Plan</label>
@@ -455,11 +459,11 @@ function Dashboard(props) {
                     placeholder="Please use a bullet '•' for each point"
                     required
                   />
-                               {formErrors.mitigationPlan && (
-                  <Form.Text className="text-danger">
-                    {formErrors.mitigationPlan}
-                  </Form.Text>
-                )}
+                  {formErrors.mitigationPlan && (
+                    <Form.Text className="text-danger">
+                      {formErrors.mitigationPlan}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 {/* Add other fields for Form Section 3 here */}
               </div>
@@ -496,11 +500,11 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.activitiesNextWeek && (
-                  <Form.Text className="text-danger">
-                    {formErrors.activitiesNextWeek}
-                  </Form.Text>
-                )}
-                  
+                    <Form.Text className="text-danger">
+                      {formErrors.activitiesNextWeek}
+                    </Form.Text>
+                  )}
+
                 </Form.Group>
                 {/* Add other fields for Form Section 4 here */}
               </div>
@@ -521,10 +525,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.highlights && (
-                  <Form.Text className="text-danger">
-                    {formErrors.highlights}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.highlights}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 <Form.Group controlId="support">
                   <label className='Title textBold'>Support Required</label>
@@ -538,10 +542,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.support && (
-                  <Form.Text className="text-danger">
-                    {formErrors.support}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.support}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 <Form.Group controlId="expansionOpportunities">
                   <label className='Title textBold'>Expansion Opportunities</label>
@@ -555,10 +559,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.expansionOpportunities && (
-                  <Form.Text className="text-danger">
-                    {formErrors.expansionOpportunities}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.expansionOpportunities}
+                    </Form.Text>
+                  )}
                 </Form.Group>
                 {/* Add other fields for Form Section 5 here */}
               </div>
@@ -576,10 +580,10 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.chennaiLead && (
-                  <Form.Text className="text-danger">
-                    {formErrors.chennaiLead}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.chennaiLead}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="londonLead">
@@ -592,13 +596,13 @@ function Dashboard(props) {
                     required
                   />
                   {formErrors.londonLead && (
-                  <Form.Text className="text-danger">
-                    {formErrors.londonLead}
-                  </Form.Text>
-                )}
+                    <Form.Text className="text-danger">
+                      {formErrors.londonLead}
+                    </Form.Text>
+                  )}
                 </Form.Group>
-             
-            </div>
+
+              </div>
             )}
 
             {/* Add more form sections here using similar conditional rendering */}
@@ -629,4 +633,4 @@ function Dashboard(props) {
   )
 
 }
-export default Dashboard;
+export default StatusForm;

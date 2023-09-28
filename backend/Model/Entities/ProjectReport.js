@@ -89,6 +89,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allownull: false,
       },
+      // isDeleted: {
+      //   type: DataTypes.STRING,
+      //   allownull: false,
+      //   defaultValue: false
+      // },
+
 
   });
   return ProjectReport;

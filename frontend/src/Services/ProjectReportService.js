@@ -2,9 +2,10 @@ import axios from 'axios';
 
 
 // for saving the weekly project status report
-const saveProjectReport  = async(data)=>{
+const saveProjectReport  = async(data,token)=>{
+    console.log("Project Status formData>>>>>>>>>",data,"And TOken is >>>>>>>",token)
     
-    const SavingUserDetails = await axios.post(`http://localhost:8080/projectReport`,data)
+    const SavingUserDetails = await axios.post(`http://localhost:8080/projectReport`,data,{headers:{Authorization:token}})
     
     return SavingUserDetails
 }

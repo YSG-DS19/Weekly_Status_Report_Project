@@ -57,7 +57,7 @@ function ReportDashboard() {
         <div className="container page">
           <div className="row">
             <div className="col textBold">
-              <h2>
+              <h2 className="textBold">
                 {projectData?.projectNumber +
                   " " +
                   projectData?.client +
@@ -95,25 +95,25 @@ function ReportDashboard() {
             <Col xs={6}>
               <Row className="p-1 mb-2">
                 <Col>
-                  <label className="textBold">Scope</label>{" "}
+                  <label className="textBold">Scope</label>
                   <div className="color-picker">
                     <div
                       className="color-preview"
                       style={{ backgroundColor: projectData?.scope }}
                     ></div>
-                  </div>{" "}
+                  </div>
                 </Col>
                 <Col>
                   <label className="textBold">Schedule</label>
                   <div className="color-picker">
                     <div
-                      className="color-preview"
+                      className="color-preview "
                       style={{ backgroundColor: projectData?.schedule }}
                     ></div>
                   </div>
                 </Col>
                 <Col>
-                  {" "}
+                 
                   <label className="textBold"> Quality</label>
                   <div className="color-picker">
                     <div

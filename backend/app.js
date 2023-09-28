@@ -47,7 +47,7 @@ const ValidateUser = require('./Middlware/ValidateUser');
 // All Customize Router 
 app.use('/signup',userCreationRouter);
 app.use('/login',loginRouter)
-app.use('/projectReport',projectReportRouter)
+app.use('/projectReport',ValidateUser,projectReportRouter)
 app.use('/getprojectdata', ValidateUser,getProjectDataRouter)
 app.use( '/reportDashboard/',ValidateUser,projectDataById)
 app.use('/getEmpData/',ValidateUser,EmpDataRouter)

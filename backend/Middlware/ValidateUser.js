@@ -7,9 +7,12 @@ const jwt_secret_key = process.env.SECRET_KEY
 
 const ValidateUser =  async (req,res,next)=>{
 
-    const token = req.headers.authorization
+    const token = req.headers.authorization;
+    const data = req.body;
 
-    console.log("token", token);
+    console.log("Data in Middleware>>>>>>>>>", data);
+
+    console.log("token in the MiddleWare ValidateUser>>>>>>>>>", token);
 
    
 
@@ -17,17 +20,19 @@ const ValidateUser =  async (req,res,next)=>{
 
         if(err){
 
+            console.log("Error>>>>>", err);
+
             res.status(401).json({message:"Token Not Verified"})
 
         }
 
-     
+        else{
 
-        req.body = decoded
+        req.body = {decoded,data}
 
         console.log("User Decoded",decoded)
 
-        next()
+        next() }
 
     })
 
