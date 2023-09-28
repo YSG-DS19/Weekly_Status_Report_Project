@@ -1,0 +1,83 @@
+.small{
+    width: 6px!important;
+    /* background-color: aqua!important; */
+}
+
+
+
+.textBold{
+    font-weight: bold !important;
+    color:  #19105B !important;
+
+
+}
+
+
+
+.textBoldPink{
+    background-color: #FF6196 !important;
+    font-weight: bold !important;
+    color:  white !important;
+    padding: 10px ;
+}
+
+.textBoldNavyBlue{
+  background-color: #19105B !important;
+  font-weight: bold !important;
+  color:  white !important;
+  padding: 10px ;
+}
+
+
+
+
+
+
+
+.headers{
+    font-weight: bold !important;
+    color: white !important;
+    background-color: #19105B !important;
+
+}
+/* 
+.bottom-fixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color:#19105B;
+    background-color: #fff; 
+    border-top: 1px solid #ccc;  
+     padding: 10px;
+  } */
+
+  .textColor{
+    color: #19105B;
+  }
+
+  .alignment{
+    text-align: center;
+  }
+
+  .page{
+    width: 100% !important;
+    border: 1px solid #19105B;;
+
+  }
+
+
+  .parent-container {
+    position: relative; /* Set the parent container to relative position */
+ 
+  
+
+  }
+  
+  .bottom-fixed {
+    position: absolute; /* Set the child div to absolute position */
+    /* bottom: 0; */
+    width: 120%;
+    /* background-color: #fff; Optional: Set a background color */
+    /* border-top: 1px solid #ccc; Optional: Add a border at the top */
+    /* padding: 10px; Optional: Add padding for better readability */
+  }
