@@ -1,16 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef,usePDF } from "react";
 import { useParams } from "react-router-dom";
 import ProjectReportService from "../../Services/ProjectReportService";
 import "./ReportDashboard.css";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col,Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
+import ReactToPdf from 'react-to-pdf';
+import { saveAs } from 'file-saver';
+import generatePDF from 'react-to-pdf';
+import { BsDownload } from 'react-icons/bs';
 
 function ReportDashboard() {
   const [projectData, setProjectData] = useState([]);
   const [employeeData, setEmployeeData] = useState([]);
   const { id } = useParams();
   console.log(id);
+
+  // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  const componentRef = useRef();
+  const generatePdf = () => {
+    // Call the toPdf function from react-to-pdf to generate the PDF
+    if (componentRef.current) {
+      componentRef.current.toPdf();
+    }
+  };
+
+  const downloadPdf = () => {
+    if (componentRef.current) {
+      // Use the toPdf function provided by react-to-pdf to generate the PDF
+      componentRef.current.toPdf().then((pdf) => {
+        // Create a Blob object from the PDF data
+        const blob = new Blob([pdf], { type: "application/pdf" });
+        // Use the saveAs function from file-saver to trigger the download
+        saveAs(blob, "report.pdf");
+      });
+    }
+  };
+
+  const targetRef = useRef();
+
+
+
 
   const location = useLocation();
   const stateData = location.state;
@@ -52,8 +82,12 @@ function ReportDashboard() {
   };
 
   return (
-    <div>
-      <div className="parent-container">
+    <>
+    <Button id="dwnbtn" onClick={() => generatePDF(targetRef, {filename: `${projectData?.projectNumber + "-"+projectData?.client}.pdf`})} >Download as PDF<BsDownload/></Button>
+    <div ref={targetRef} >
+    
+      <div  className="parent-container">
+        <div>
         <div className="container page">
           <div className="row">
             <div className="col textBold">
@@ -157,7 +191,7 @@ function ReportDashboard() {
               </thead>
               <tbody>
                 <tr>
-                <th scope="row" className="textColor">
+                <td  className=" col-4 textColor">
                     <ul>
                       {projectData?.issueRisk
                         ?.split("•")
@@ -167,11 +201,11 @@ function ReportDashboard() {
                           </li>
                         ))}
                     </ul>
-                  </th>
+                  </td>
                   {/* <th scope="row" className="textColor">
                     {projectData?.issueRisk}
                   </th> */}
-                  <td className="textColor">
+                  <td className=" col-4 textColor">
                     <ul>
                       {projectData?.impact
                         ?.split("•")
@@ -184,7 +218,7 @@ function ReportDashboard() {
                   </td>
                   {/* <td className="textColor">{projectData?.impact}</td> */}
 
-                  <td className="textColor">
+                  <td className=" col-4 textColor">
                     <ul>
                       {projectData?.mitigationPlan
                         ?.split("•")
@@ -271,7 +305,7 @@ function ReportDashboard() {
     </div> */}
           </div>
 
-          {/* <div class="bottom-fixed"> */}
+       
           <div class="row bottom-fixed">
             <div class="col-3 textColor">
               <label className="textBold">Circulation Limited :</label>{" "}
@@ -286,10 +320,13 @@ function ReportDashboard() {
               {projectData?.londonLead}
             </div>
           </div>
-          {/* </div> */}
+       
+        </div>
         </div>
       </div>
+
     </div>
+    </>
   );
 }
 
